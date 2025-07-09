@@ -49,7 +49,7 @@ jobs:
 
       - name: Build and copy dependencies
         run: |
-          mvn ${{ env.MAVEN_CLI_OPTS }} clean install -U
+          # mvn ${{ env.MAVEN_CLI_OPTS }} clean install -U
           mvn ${{ env.MAVEN_CLI_OPTS }} verify
           mvn ${{ env.MAVEN_CLI_OPTS }} dependency:copy-dependencies -DoutputDirectory=dependencies -Dmdep.useRepositoryLayout=true -Dmdep.copyPom=true -Dmdep.addParentPoms=true
           
