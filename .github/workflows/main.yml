@@ -58,6 +58,7 @@ jobs:
           mkdir -p dependencies/com/amazonaws/samples/movie-service-utils/0.2.0
           cp ~/.m2/repository/com/amazonaws/samples/movie-service-utils/0.1.0/* dependencies/com/amazonaws/samples/movie-service-utils/0.1.0/
           cp ~/.m2/repository/com/amazonaws/samples/movie-service-utils/0.2.0/* dependencies/com/amazonaws/samples/movie-service-utils/0.2.0/
+          rm **/*.repositories
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
