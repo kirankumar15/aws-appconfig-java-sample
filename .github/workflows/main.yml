@@ -39,13 +39,13 @@ jobs:
             -Dversion=0.1.0 \
             -Dpackaging=jar
           
-          # Install Java 17 version
-          mvn install:install-file \
-            -Dfile=./movie-service-utils/built-library/0_2_0/movie-service-utils-0.2.0.jar \
-            -DgroupId=com.amazonaws.samples \
-            -DartifactId=movie-service-utils \
-            -Dversion=0.2.0 \
-            -Dpackaging=jar
+          # # Install Java 17 version
+          # mvn install:install-file \
+          #   -Dfile=./movie-service-utils/built-library/0_2_0/movie-service-utils-0.2.0.jar \
+          #   -DgroupId=com.amazonaws.samples \
+          #   -DartifactId=movie-service-utils \
+          #   -Dversion=0.2.0 \
+          #   -Dpackaging=jar
 
       - name: Build and copy dependencies
         run: |
@@ -54,11 +54,11 @@ jobs:
           mvn ${{ env.MAVEN_CLI_OPTS }} dependency:copy-dependencies -DoutputDirectory=dependencies -Dmdep.useRepositoryLayout=true -Dmdep.copyPom=true -Dmdep.addParentPoms=true
           
           # Manually copy both versions of movie-service-utils to ensure both are available
-          mkdir -p dependencies/com/amazonaws/samples/movie-service-utils/0.1.0
-          mkdir -p dependencies/com/amazonaws/samples/movie-service-utils/0.2.0
-          cp ~/.m2/repository/com/amazonaws/samples/movie-service-utils/0.1.0/* dependencies/com/amazonaws/samples/movie-service-utils/0.1.0/
-          cp ~/.m2/repository/com/amazonaws/samples/movie-service-utils/0.2.0/* dependencies/com/amazonaws/samples/movie-service-utils/0.2.0/
-          find dependencies -name "*.repositories" -delete 2>/dev/null || true
+          # mkdir -p dependencies/com/amazonaws/samples/movie-service-utils/0.1.0
+          # mkdir -p dependencies/com/amazonaws/samples/movie-service-utils/0.2.0
+          # cp ~/.m2/repository/com/amazonaws/samples/movie-service-utils/0.1.0/* dependencies/com/amazonaws/samples/movie-service-utils/0.1.0/
+          # cp ~/.m2/repository/com/amazonaws/samples/movie-service-utils/0.2.0/* dependencies/com/amazonaws/samples/movie-service-utils/0.2.0/
+          # find dependencies -name "*.repositories" -delete 2>/dev/null || true
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
