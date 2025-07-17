@@ -1,0 +1,32 @@
+name: Test Debug Information Step
+
+on:
+  workflow_dispatch:  # This allows manual triggering of the workflow
+
+jobs:
+  test-debug-step:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      
+      - name: Intentional Failure
+        run: |
+          echo "This step will fail intentionally"
+          exit 1  # This command causes the step to fail
+      
+      - name: Debug information
+        if: failure()
+        run: |
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Commit message: ${{ github.event.head_commit.message }}"
+          echo "Java version logic result: ${{ contains(github.event.head_commit.message, 'Code transformation completed') && '17' || '8' }}"
+          echo "Local Maven repository contents:"
+          find ~/.m2/repository/com/amazonaws/samples -name "*.jar" 2>/dev/null || echo "No movie-service-utils found in local repo"
+          java -version
+          mvn -version
